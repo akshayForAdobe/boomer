@@ -87,6 +87,7 @@ func httpReq(method string, url string, bodysize int64, headers []header, wait1 
 		pr, pw := io.Pipe()
 		go func() {
 			for i := int64(0); i < bodysize/dataArraySize; i++ {
+				log.Println("Performing pipe write at: ", time.Now())
 				pw.Write(postData)
 				time.Sleep(time.Duration(throughPutWait) * time.Millisecond)
 			}
